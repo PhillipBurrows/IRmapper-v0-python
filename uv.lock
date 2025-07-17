@@ -1,0 +1,30 @@
+version = 1
+revision = 2
+requires-python = ">=3.12"
+
+[[package]]
+name = "irmapper-v0-python"
+version = "0.1.0"
+source = { virtual = "." }
+dependencies = [
+    { name = "slint" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "slint", specifier = ">=1.11.0a1" }]
+
+[[package]]
+name = "slint"
+version = "1.12.1b1"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/8e/f6/e04a2d0b1d40e04a195ed915171517709c01f73f19e1c6045116c9ee589b/slint-1.12.1b1.tar.gz", hash = "sha256:93150ae98986021389682101bb2d3d18a4259733f0c108d5c9c7558b3250d8c7", size = 1906760, upload-time = "2025-06-25T14:38:53.91Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/8e/ea/f3bb6bdfa637eefed64fb7b8061ad8e797b2751c1c24696aaeddbb0ec929/slint-1.12.1b1-cp310-abi3-ios_13_0_arm64_iphoneos.whl", hash = "sha256:c3f4be1635ae46559dfd2c1752fe7d44a0b180bf41fe986157af32c116c6d3e0", size = 8788436, upload-time = "2025-06-25T14:38:30.233Z" },
+    { url = "https://files.pythonhosted.org/packages/ee/a0/33e2cdce2fd3047391f798de3fb8e1a31eeaa3867a7f8b347e4955698b78/slint-1.12.1b1-cp310-abi3-ios_13_0_arm64_iphonesimulator.whl", hash = "sha256:bc06b9a8e8c0688c04aae5b61078c32f6a24706b25a4c9da1fb20308442c31f2", size = 8959135, upload-time = "2025-06-25T14:38:33.493Z" },
+    { url = "https://files.pythonhosted.org/packages/10/2c/61872ae8bc36c74624af91e5be29533c2ff2714615f3383103a1978ae57b/slint-1.12.1b1-cp310-abi3-macosx_11_0_arm64.whl", hash = "sha256:68eae7d7e69b570fb6667e6d6e4186b37e380110c1458e5c8955e85ab14cf81b", size = 11738947, upload-time = "2025-06-25T14:38:36.028Z" },
+    { url = "https://files.pythonhosted.org/packages/45/60/2c03772e903adbb8bc129f1aac3a7702b97962984ecb69b3b6c8a17cbe82/slint-1.12.1b1-cp310-abi3-macosx_11_0_x86_64.whl", hash = "sha256:8a19f19250f67872b0c82d0c658edb091852df847d1547779b480552d7ea9e95", size = 12292282, upload-time = "2025-06-25T14:38:37.995Z" },
+    { url = "https://files.pythonhosted.org/packages/58/ec/fed21cdf33fa251553d41bc26d84d71213e7d6d9ba6e7965ef994ba108e2/slint-1.12.1b1-cp310-abi3-manylinux_2_31_aarch64.whl", hash = "sha256:5153954c7d53e28f3aa56eaca8b306d1481dfac4a099c6b3f6f81a52eda66da2", size = 16111350, upload-time = "2025-06-25T14:38:41.802Z" },
+    { url = "https://files.pythonhosted.org/packages/fe/d7/7378a06b90edc25341bc4b012fae43ea87521af294d65a84ab9319de030f/slint-1.12.1b1-cp310-abi3-manylinux_2_31_armv7l.whl", hash = "sha256:0c64a2ab95e17c12ae775ec21d6314c47bd0cb415ca38cf02da6d06122cde5e2", size = 15864136, upload-time = "2025-06-25T14:38:43.973Z" },
+    { url = "https://files.pythonhosted.org/packages/af/48/e361a02482afbf001cd7082c8a56a11f4b90e92598fc75dcc2c0a58566d8/slint-1.12.1b1-cp310-abi3-manylinux_2_35_x86_64.whl", hash = "sha256:fe7fb24c5991e6ffcf2311bcedf5491d7847ff96b316a60ec35d033553ecf8f0", size = 16741278, upload-time = "2025-06-25T14:38:47.549Z" },
+    { url = "https://files.pythonhosted.org/packages/71/9d/2ebe69d0fb723206f9b22d2be382130a24ccac9d370780d060800e6f0576/slint-1.12.1b1-cp310-abi3-win_amd64.whl", hash = "sha256:17a927bcd4044f54dd43d978b187cfb6b2bbb407af8cdac7300e4a48e1b7f6ab", size = 12232827, upload-time = "2025-06-25T14:38:50.134Z" },
+]

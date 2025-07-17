@@ -1,0 +1,173 @@
+import { Button, VerticalBox, LineEdit, TabWidget, DatePickerPopup } from "std-widgets.slint";
+
+export component AppWindow inherits Window {
+    height: 950px;
+    width: 850px;
+    title: "IRmapper";
+
+    in-out property<string> kml_path_text: "unmodified";
+    callback kml_to_shapefile(kml_path: string);
+    callback open_file_dump_folder();
+    
+    // This is the header of the application
+    VerticalBox {
+        width: 100%;
+        height: 20%;
+        y: 0px;
+        padding: 20px;
+        
+        Image {
+            height: 75px;
+            //y: 10px;
+            source: @image-url("../resources/verimap-logo.png");
+        }
+
+        Text {
+            text: "Infrared Fire Mapper (IRmapper App)";
+            //y: 110px;
+            horizontal-alignment: center;
+            font-family: "Arial";
+            font-size: 20px;
+            color: black;
+        }
+    }
+
+    // This is where the tabs and other widgets will be placed
+    VerticalBox { 
+        width: 100%;
+        height: 80%;
+        y: 150px;
+        padding: 20px;
+
+
+        TabWidget {
+            // Fire Perimeter DB tab
+            Tab {
+                title: "Fire Peirmeter DB";
+                Rectangle { 
+                    //background: #6096AE; 
+                    border-color: #6096AE;
+                    border-width: 5px;
+                }
+                Button {
+                    text: "Open file-dump folder";
+                    clicked => { 
+                        root.open_file_dump_folder();
+                    }
+                }
+
+            }
+
+            // Process Scan tab
+            Tab {
+                title: "Process Scan";
+                Rectangle { 
+                    //background: #6096AE; 
+                    border-color: #6096AE;
+                    border-width: 5px;
+                    TouchArea { }
+                }
+
+                /*
+                Text {
+                    text: "Airborne data location:";
+                    y: 25px;
+                    font-family: "Arial";
+                    font-size: 15px;
+                    color: black;
+                }
+
+                LineEdit {
+                    placeholder-text: "Please enter path to RAW fire data folder";
+                    height: 25px;
+                    width: 500px;
+                    y: 55px;
+                }
+                
+                /*Image {
+                    height: 125px;
+                    y: 90px;
+                    source: @image-url("../resources/standard-tree.png");
+                } */
+      
+                date-picker-button := Button {
+                    y: 400px;
+                    text: @tr("Select delivery date");
+
+                    clicked => {
+                        date-picker.show();
+                    }
+                }
+
+                date-picker := DatePickerPopup {
+                    y: (root.height - self.height ) / 2;
+                    close-policy: PopupClosePolicy.no-auto-close;
+
+                    accepted(date) => {
+                        date-picker.close();
+                    }
+                    canceled => {
+                        date-picker.close();
+                    }
+                }
+
+                Text {
+                    text: "Deliverable date is: ";
+                    y: 370px;
+                    font-family: "Arial";
+                    font-size: 15px;
+                    color: black;
+                }
+
+                Button {
+                    y: 550px;
+                    height: 50px;
+                    width: 200px;
+                    text: "Process input data";
+                    clicked => {
+                    //   root.request-increase-value();
+                    }
+                }*/
+
+                Text {
+                    y: 100px;
+                    text: "kml_path_text: " + root.kml_path_text;
+                }
+
+                LineEdit {
+                    y: 25px;
+                    placeholder-text: "Input KML Path";
+                    text: root.kml_path_text;
+                    edited => {
+                        root.kml_path_text = self.text; // Update the in-out property on edit
+                    }
+                }
+
+                Button {
+                    text: "Process KML to SHP";
+                    clicked => { 
+                        kml_to_shapefile(root.kml_path_text);
+                    }
+                }
+            }
+
+            //config tab
+            Tab {
+                title: "configuration";
+                Rectangle { 
+                    //background: #6096AE; 
+                    border-color: #6096AE;
+                    border-width: 5px;
+                }
+
+                Text {
+                    text: "Configuration settings will be here";
+                    y: 25px;
+                    font-family: "Arial";
+                    font-size: 15px;
+                    color: black;
+                }   
+            }
+        }
+    }
+}

@@ -1,0 +1,3 @@
+([('main',
+   '/Users/phillipburrows/Documents/verimap/IRmapper-v0-python/dist/main',
+   'EXECUTABLE')],)
