@@ -1,0 +1,14 @@
+title = "IRmapper Configuration"
+description = "Configuration settings for IRmapper application."  
+
+[cloud_storage]
+gdrive = "G:/Shared drives/IRmapper/GIS-Data-Center/"
+
+[crs]
+intake_crs = "EPSG:4269"
+alberta_crs = "EPSG:3400"
+british_Columbia_crs = "EPSG:3005"
+
+[perimeter_method]
+alberta_perimeter_method = "union_perimeters"
+british_columbia_perimeter_method = "burning_zone_only"

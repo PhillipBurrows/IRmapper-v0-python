@@ -3,11 +3,20 @@ import { Button, VerticalBox, LineEdit, TabWidget, DatePickerPopup } from "std-w
 export component AppWindow inherits Window {
     height: 950px;
     width: 850px;
-    title: "IRmapper";
+    title: "Verimap IRmapper";
 
+    //properties
     in-out property<string> kml_path_text: "unmodified";
+    in-out property<string> request_data_validity_status: "unknown";
+    in-out property<string> request_data_validity_issue: "unprocessed";
+    
+    //callbacks for the main application logic
     callback kml_to_shapefile(kml_path: string);
-    callback open_file_dump_folder();
+    callback open_request_dump_folder();
+    callback purge_request_dump_folder();
+    callback process_request_dump_folder();
+    callback purge_primeter_geodatabase();
+    callback inject_primeter_geodatabase();
     
     // This is the header of the application
     VerticalBox {
@@ -23,7 +32,7 @@ export component AppWindow inherits Window {
         }
 
         Text {
-            text: "Infrared Fire Mapper (IRmapper App)";
+            text: "Infrared Fire Mapper v0 (\"IRmapper\")";
             //y: 110px;
             horizontal-alignment: center;
             font-family: "Arial";
@@ -43,20 +52,75 @@ export component AppWindow inherits Window {
         TabWidget {
             // Fire Perimeter DB tab
             Tab {
-                title: "Fire Peirmeter DB";
+                title: "Client Request Geodatabase";
                 Rectangle { 
                     //background: #6096AE; 
                     border-color: #6096AE;
                     border-width: 5px;
                 }
+
                 Button {
-                    text: "Open file-dump folder";
+                    y: 25px;
+                    text: "Open request-dump folder";
                     clicked => { 
-                        root.open_file_dump_folder();
+                        root.open_request_dump_folder();
                     }
                 }
 
+                Button {
+                    y: 75px;
+                    text: "Purge request-dump folder";
+                    clicked => { 
+                        root.purge_request_dump_folder();
+                    }
+                }
+
+                Button {
+                    y: 125px;
+                    text: "Process request data";
+                    clicked => { 
+                        root.process_request_dump_folder();
+                    }
+                }
+
+                Text {
+                    y: 175px;
+                    text: "Request data status: " + root.request_data_validity_status;
+                    font-family: "Arial";
+                    font-size: 15px;
+                    color: root.request_data_validity_status == "unprocessed" ? black
+                    : root.request_data_validity_status == "valid" ? green
+                    : root.request_data_validity_status == "invalid" ? red : black;
+                }
+
+                Text {
+                    y: 200px;
+                    text: "Request data issue: " + root.request_data_validity_issue;
+                    font-family: "Arial";
+                    font-size: 15px;
+                    color: root.request_data_validity_issue == "unprocessed" ? black
+                    : root.request_data_validity_issue == "passed checks" ? green : red;
+                }
+
+                Button {
+                    y: 250px;
+                    text: "Purge perimeter geodatabase";
+                    clicked => { 
+                        root.purge_primeter_geodatabase();
+                    }
+                }
+
+                Button {
+                    y: 300px;
+                    text: "Inject request perimeters";
+                    // Only allow DB injection if the request data is valid
+                    enabled: root.request_data_validity_status == "valid" ? true : false;
+                    clicked => { 
+                        root.inject_primeter_geodatabase();
+                    }
+                }
             }
+
 
             // Process Scan tab
             Tab {
@@ -153,7 +217,7 @@ export component AppWindow inherits Window {
 
             //config tab
             Tab {
-                title: "configuration";
+                title: "Configs";
                 Rectangle { 
                     //background: #6096AE; 
                     border-color: #6096AE;
@@ -166,7 +230,14 @@ export component AppWindow inherits Window {
                     font-family: "Arial";
                     font-size: 15px;
                     color: black;
-                }   
+                }
+
+                Button {
+                    text: "Update configs";
+                    clicked => { 
+                        root.open_request_dump_folder();
+                    }
+                }
             }
         }
     }
