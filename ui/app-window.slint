@@ -15,8 +15,8 @@ export component AppWindow inherits Window {
     callback open_request_dump_folder();
     callback purge_request_dump_folder();
     callback process_request_dump_folder();
-    callback purge_primeter_geodatabase();
-    callback inject_primeter_geodatabase();
+    callback purge_perimeter_geodatabase();
+    callback inject_perimeter_geodatabase();
     
     // This is the header of the application
     VerticalBox {
@@ -106,7 +106,7 @@ export component AppWindow inherits Window {
                     y: 250px;
                     text: "Purge perimeter geodatabase";
                     clicked => { 
-                        root.purge_primeter_geodatabase();
+                        root.purge_perimeter_geodatabase();
                     }
                 }
 
@@ -116,7 +116,7 @@ export component AppWindow inherits Window {
                     // Only allow DB injection if the request data is valid
                     enabled: root.request_data_validity_status == "valid" ? true : false;
                     clicked => { 
-                        root.inject_primeter_geodatabase();
+                        root.inject_perimeter_geodatabase();
                     }
                 }
             }

@@ -1,4 +1,4 @@
-import slint, sys, os, geopandas, subprocess, sys, shutil
+import slint, sys, os, geopandas, subprocess, sys, shutil, pandas
 from osgeo import ogr
 
 class MainWindow(slint.loader.ui.app_window.AppWindow):
@@ -117,7 +117,7 @@ class MainWindow(slint.loader.ui.app_window.AppWindow):
         print("request dump folder processing complete...")
 
     @slint.callback
-    def purge_primeter_geodatabase(self):
+    def purge_perimeter_geodatabase(self):
         """ 
         Deletes all objects in the perimeter geodatabase.
         """
@@ -164,7 +164,7 @@ class MainWindow(slint.loader.ui.app_window.AppWindow):
         print("Perimeter geodatabase purged.")
 
     @slint.callback
-    def inject_primeter_geodatabase(self):
+    def inject_perimeter_geodatabase(self):
         """ 
         Injects the request perimeters into the perimeter geodatabase.
         """
@@ -186,30 +186,17 @@ class MainWindow(slint.loader.ui.app_window.AppWindow):
                     for fire in fires_list:
                         requested_fires.append(fire)
                         single_fire_gdf = gdf_fires[gdf_fires['FIRE_NUMBE'] == fire]
+                        single_fire_gdf = single_fire_gdf.filter(items = ['FIRE_NUMBE', 'geometry'])
+                        # add a new column called injection_timestamp with the current date and time   
+                        single_fire_gdf['update_timestamp'] = pandas.Timestamp.now()
+                        print(single_fire_gdf.head())
                         single_fire_gdf.to_file(gdb_path, layer=fire, driver="GPKG", mode="a")
                         print(f"Injected {fire} into perimeter geodatabase.")
         print("...Request perimeters injected into perimeter geodatabase...")
 
 
+
+
 main_window = MainWindow()
 main_window.show()
 main_window.run()
-
-
-"""    @slint.callback
-    def kml_to_shapefile(self, kml_path):
-
-        Converts a .kml file to a shapefile and saves it in the same directory.
-
-        print("Processing KML...")
-        # Read the KML file
-        gdf = geopandas.read_file(kml_path, driver='KML')##.columns("FID", "Name", "Object", "geometry")
-        print(gdf.head())
-
-        # Prepare output path
-        base = os.path.splitext(kml_path)[0]
-        shp_path = base + ".shp"
-        
-        # Save as shapefile
-        gdf.to_file(shp_path, driver='ESRI Shapefile')
-        #return shp_path"""
