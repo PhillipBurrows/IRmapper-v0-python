@@ -1,4 +1,4 @@
-import { Button, VerticalBox, LineEdit, TabWidget, DatePickerPopup } from "std-widgets.slint";
+import { Button, VerticalBox, LineEdit, TabWidget, DatePickerPopup, StandardTableView } from "std-widgets.slint";
 
 export component AppWindow inherits Window {
     height: 950px;
@@ -119,6 +119,26 @@ export component AppWindow inherits Window {
                         root.inject_perimeter_geodatabase();
                     }
                 }
+
+                StandardTableView {
+                    width: 230px;
+                    height: 200px;
+                    columns: [
+                        { title: "Header 1" },
+                        { title: "Header 2" },
+                    ];
+                    rows: [
+                        [
+                            { text: "Item 1" }, { text: "Item 2" },
+                        ],
+                        [
+                            { text: "Item 1" }, { text: "Item 2" },
+                        ],
+                        [
+                            { text: "Item 1" }, { text: "Item 2" },
+                        ]
+                    ];
+                }               
             }
 
 

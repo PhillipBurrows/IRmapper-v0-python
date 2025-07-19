@@ -194,6 +194,9 @@ class MainWindow(slint.loader.ui.app_window.AppWindow):
                         print(f"Injected {fire} into perimeter geodatabase.")
         print("...Request perimeters injected into perimeter geodatabase...")
 
+        # Update contents on GDB table
+        
+
 
 
 
